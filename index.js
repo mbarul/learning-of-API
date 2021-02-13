@@ -34,16 +34,10 @@ const render = (data) => {
     container.appendChild(fragment);
 }
 
-const success = (data) => {
-    const beers = JSON.parse(data.target.responseText);
-    render(beers);
-    console.log(beers[2].name)
-}
+
 const error = (err) => {
     console.log(err);
 }
-const req = new XMLHttpRequest();
-req.addEventListener('load', success);
-req.addEventListener('error', error);
-req.open('GET', API_URL);
-req.send();
+fetch(API_URL)
+    .then((response) => response.json())
+    .then((render))
